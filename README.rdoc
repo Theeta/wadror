@@ -1,1 +1,1 @@
-http://fathomless-falls-4765.herokuapp.com/breweries
+http://fathomless-falls-4765.herokuapp.com
