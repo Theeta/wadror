@@ -1,0 +1,43 @@
+irb(main):006:0> b = Brewery.create name:"BrewDog", year:2007
+   (0.1ms)  begin transaction
+  SQL (0.4ms)  INSERT INTO "breweries" ("created_at", "name", "updated_at", "year") VALUES (?, ?, ?, ?)  [["created_at", Tue, 21 Jan 2014 16:35:54 UTC +00:00], ["name", "BrewDog"], ["updated_at", Tue, 21 Jan 2014 16:35:54 UTC +00:00], ["year", 2007]]
+   (214.7ms)  commit transaction
+=> #<Brewery id: 5, name: "BrewDog", year: 2007, created_at: "2014-01-21 16:35:54", updated_at: "2014-01-21 16:35:54">
+irb(main):007:0> b.beers.create name:"Punk IPA", style:"IPA"
+   (0.1ms)  begin transaction
+  SQL (0.4ms)  INSERT INTO "beers" ("brewery_id", "created_at", "name", "style", "updated_at") VALUES (?, ?, ?, ?, ?)  [["brewery_id", 5], ["created_at", Tue, 21 Jan 2014 16:38:51 UTC +00:00], ["name", "Punk IPA"], ["style", "IPA"], ["updated_at", Tue, 21 Jan 2014 16:38:51 UTC +00:00]]
+   (241.9ms)  commit transaction
+=> #<Beer id: 14, name: "Punk IPA", style: "IPA", brewery_id: 5, created_at: "2014-01-21 16:38:51", updated_at: "2014-01-21 16:38:51">
+irb(main):008:0> b.beers.create name:"Nanny State", style:"lowalcohol"
+   (0.1ms)  begin transaction
+  SQL (0.2ms)  INSERT INTO "beers" ("brewery_id", "created_at", "name", "style", "updated_at") VALUES (?, ?, ?, ?, ?)  [["brewery_id", 5], ["created_at", Tue, 21 Jan 2014 16:40:58 UTC +00:00], ["name", "Nanny State"], ["style", "lowalcohol"], ["updated_at", Tue, 21 Jan 2014 16:40:58 UTC +00:00]]
+   (209.1ms)  commit transaction
+=> #<Beer id: 15, name: "Nanny State", style: "lowalcohol", brewery_id: 5, created_at: "2014-01-21 16:40:58", updated_at: "2014-01-21 16:40:58">
+irb(main):009:0> c = Beer.find_by name:"Punk IPA"
+  Beer Load (0.1ms)  SELECT "beers".* FROM "beers" WHERE "beers"."name" = 'Punk IPA' LIMIT 1
+=> #<Beer id: 14, name: "Punk IPA", style: "IPA", brewery_id: 5, created_at: "2014-01-21 16:38:51", updated_at: "2014-01-21 16:38:51">
+irb(main):010:0> c.ratings.create score:20
+   (0.1ms)  begin transaction
+  SQL (0.4ms)  INSERT INTO "ratings" ("beer_id", "created_at", "score", "updated_at") VALUES (?, ?, ?, ?)  [["beer_id", 14], ["created_at", Tue, 21 Jan 2014 16:44:11 UTC +00:00], ["score", 20], ["updated_at", Tue, 21 Jan 2014 16:44:11 UTC +00:00]]
+   (236.3ms)  commit transaction
+=> #<Rating id: 4, score: 20, beer_id: 14, created_at: "2014-01-21 16:44:11", updated_at: "2014-01-21 16:44:11">
+irb(main):011:0> c.ratings.create score:15
+   (0.1ms)  begin transaction
+  SQL (0.2ms)  INSERT INTO "ratings" ("beer_id", "created_at", "score", "updated_at") VALUES (?, ?, ?, ?)  [["beer_id", 14], ["created_at", Tue, 21 Jan 2014 16:44:56 UTC +00:00], ["score", 15], ["updated_at", Tue, 21 Jan 2014 16:44:56 UTC +00:00]]
+   (248.2ms)  commit transaction
+=> #<Rating id: 5, score: 15, beer_id: 14, created_at: "2014-01-21 16:44:56", updated_at: "2014-01-21 16:44:56">
+irb(main):012:0> d = Beer.find_by name:"Nanny State"
+  Beer Load (0.3ms)  SELECT "beers".* FROM "beers" WHERE "beers"."name" = 'Nanny State' LIMIT 1
+=> #<Beer id: 15, name: "Nanny State", style: "lowalcohol", brewery_id: 5, created_at: "2014-01-21 16:40:58", updated_at: "2014-01-21 16:40:58">
+irb(main):013:0> d.ratings.create score:9
+   (0.1ms)  begin transaction
+  SQL (0.2ms)  INSERT INTO "ratings" ("beer_id", "created_at", "score", "updated_at") VALUES (?, ?, ?, ?)  [["beer_id", 15], ["created_at", Tue, 21 Jan 2014 16:46:19 UTC +00:00], ["score", 9], ["updated_at", Tue, 21 Jan 2014 16:46:19 UTC +00:00]]
+   (217.7ms)  commit transaction
+=> #<Rating id: 6, score: 9, beer_id: 15, created_at: "2014-01-21 16:46:19", updated_at: "2014-01-21 16:46:19">
+irb(main):014:0> d.ratings.create score:11
+   (0.1ms)  begin transaction
+  SQL (0.3ms)  INSERT INTO "ratings" ("beer_id", "created_at", "score", "updated_at") VALUES (?, ?, ?, ?)  [["beer_id", 15], ["created_at", Tue, 21 Jan 2014 16:46:40 UTC +00:00], ["score", 11], ["updated_at", Tue, 21 Jan 2014 16:46:40 UTC +00:00]]
+   (413.9ms)  commit transaction
+=> #<Rating id: 7, score: 11, beer_id: 15, created_at: "2014-01-21 16:46:40", updated_at: "2014-01-21 16:46:40">
+ 
+

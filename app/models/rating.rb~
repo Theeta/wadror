@@ -1,0 +1,7 @@
+class Rating < ActiveRecord::Base
+	belongs_to :beer
+
+	def to_s
+	  beer.name + "#{beer.name.find_by :beer_id} #{score}"
+	end
+end
