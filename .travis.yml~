@@ -1,0 +1,15 @@
+language: ruby
+rvm:
+- 2.0.0
+script:
+- bundle exec rake db:migrate --trace
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec -fd spec/
+deploy:
+  provider: heroku
+  api_key:
+    secure: aj9Yja07WVYF7CvakaxZYSKBliHRkNElVUJlNYO1oPI+ZL1bar3izjnuzf90Z4djmqDz3jv29DBa4YmkeXNQfoVMCg4gTL1wtTt6ONmdITNQ4yJ+gvMIHr/URzJsb8hL7N0g57+sxN8HTOyaWLI9T6h0yPqp2iwJUIDB2mBRqAQ=
+  app: fathomless-falls-4765
+  on:
+    repo: Theeta/wadror
