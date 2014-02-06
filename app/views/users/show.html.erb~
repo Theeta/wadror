@@ -10,6 +10,10 @@
     no ratings!
   <% else %>
     has made <%= pluralize(@user.ratings.count, 'rating')%>, average <%= @user.average_rating %>
+    <br>
+    favorite style: <%= @user.favorite_style.name %>
+    <br>
+    favorite brewery: <%= @user.favorite_brewery.name %>
   <% end %>
 </p> 
 
@@ -39,7 +43,7 @@
 
 <% if @user == current_user %>
 <%= link_to 'Edit', edit_user_path(@user) %> | 
-<%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %> | 
+<%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %> | 
+<% end %>
 <%= link_to 'Back', users_path %>
 

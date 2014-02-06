@@ -9,9 +9,7 @@ class RatingsController < ApplicationController
   end
 
   def create
-    if @user == current_user
     @rating = Rating.new params.require(:rating).permit(:score, :beer_id)
-
     if @rating.save
       current_user.ratings << @rating
       redirect_to user_path current_user
@@ -19,9 +17,6 @@ class RatingsController < ApplicationController
       @beers = Beer.all
       render :new
     end
-    else
-    redirect_to :ratings, notice: "can't do this"
-  end
   end
 
   def destroy
