@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_that_admin, only: [:destroy]
 
   # GET /users
   # GET /users.json
@@ -43,7 +44,7 @@ class UsersController < ApplicationController
     
     if @user == current_user
     respond_to do |format|
-      if if user_params.username.nil? and @user == current_user and @user.update(user_params)
+      if user_params.username.nil? and @user == current_user and @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
