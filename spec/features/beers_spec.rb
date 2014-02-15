@@ -5,6 +5,7 @@ describe "New Beer page" do
   before :each do
     sign_in(username:"Pekka", password:"Foobar1")
     FactoryGirl.create :brewery
+    FactoryGirl.create :style
   end
   
   it "should be possible to create a new beer with a valid name" do

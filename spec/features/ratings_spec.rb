@@ -53,7 +53,7 @@ describe "Rating" do
   it "user's own page contain favorite style and brewery" do
     FactoryGirl.create :rating, beer:beer1, user:user
     visit user_path(user)
-    expect(page).to have_content "favorite style: Lager"
+    expect(page).to have_content "favorite style: tyyli"
     expect(page).to have_content "favorite brewery: Koff"
   end
 end

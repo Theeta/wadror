@@ -73,7 +73,7 @@ describe User do
       beer = create_beer_with_rating(10, user)
       create_beers_with_ratings(11, 12, 13, user)
 
-      expect(user.favorite_style).to eq(beer.style)
+      expect(user.favorite_style.name).to eq(beer.style.name)
     end
     
     it "is the style with highest average rating if many styles have ratings" do

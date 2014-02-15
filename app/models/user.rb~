@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :ratings, dependent: :destroy
   has_many :beers, through: :ratings
   has_many :memberships, dependent: :destroy
-  has_many :beer_clubs, through: :membership
+  has_many :beer_clubs, through: :memberships
   
   def favorite_beer
     return nil if ratings.empty?
@@ -19,20 +19,14 @@ class User < ActiveRecord::Base
   
   def favorite_style
     return nil if ratings.empty?
-    group_by_style = ratings.group_by { |r| r.beer.style }
+    group_by_style = ratings.group_by { |r| r.beer.style_id }
     (average_ratings group_by_style).max_by { |style, average| average }[0]
   end
-
+  
   def favorite_brewery
-    calculate_favorite :brewery
-  end
-
-  def calculate_favorite(attribute)
     return nil if ratings.empty?
-
-    groups = ratings.group_by { |r| r.beer.send attribute }
-    groups = calculate_average_ratings_for groups
-    groups.max_by { |key, avg_rating| avg_rating }[0]
+    group_by_brewery = ratings.group_by { |r| r.beer.brewery }
+    (average_ratings group_by_brewery).max_by { |brewery, average| average }[0]
   end
 
   def average_ratings(groups)

@@ -22,16 +22,27 @@ FactoryGirl.define do
     name "best"
     year 1990
   end
+  
+  factory :style do
+    name "tyyli"
+    description "kuvaus"
+  end
+  
+  factory :style2, class: Style do
+    name "toinen tyyli"
+    description "kuvaus on"
+  end
+
 
   factory :beer do
     name "anonymous"
     brewery
-    style "Lager"
+    style
   end
   
   factory :beer2, class: Beer do
    name "nimi"
-   brewery:brevery2
-   style "Pale ale"
+   brewery
+   style2 
   end
 end
