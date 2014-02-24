@@ -68,3 +68,8 @@ gem "rails-settings-cached", "0.3.1"
 
 gem 'byebug', group: [:development, :test]
 gem 'bcrypt-ruby', '~> 3.1.2'
+
+gem 'bootstrap-sass'
+group :development do
+  gem 'rails_layout'
+end
